@@ -9,6 +9,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import type { Request, Response } from "express";
 import express from "express";
+import helmet from "helmet";
 import http from "http";
 import { z } from "zod";
 
@@ -60,6 +61,7 @@ export async function startMcpServer(
   const user = meRes.value;
 
   const app = express();
+  app.use(helmet());
 
   const activeSessions = new Map<
     string,
